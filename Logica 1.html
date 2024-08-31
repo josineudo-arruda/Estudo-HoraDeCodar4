@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width-device-width, initial-scale=1.0">
+    <title>Lógica 1</title>
+    <script>
+        var alunos = [];
+        var aluno = ""
+        while(aluno != "PARE") {
+            if(aluno != "") {
+                aluno = prompt("Insira o nome do aluno (PARE: mostrar lista):");
+                alunos.push(aluno);
+            }
+        }
+
+        document.write("<h1>Nesta tabela temos "+alunos.length+" cadastrados</h1>");
+        document.write("<table style='border: 2px solid blue'>");
+            document.write("<thead>");
+                document.write("<th>Número</th>");
+                document.write("<th>Nome</th>");
+            document.write("</thead>");
+            document.write("<tbody>");
+                for(i=0;i<alunos.length;i++) {
+                    document.write("<tr>");
+                    document.write("<td>"+(i+1)+"</td>");
+                    document.write("<td>"+alunos[i]+"</td>");
+                    document.write("</tr>");
+                }
+            document.write("</tbody>");
+        document.write("</table>");
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
