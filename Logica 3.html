@@ -1,12 +1,84 @@
 <!doctype html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8"/>
-    <meta name="viewport" content="width-device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lógica 3</title>
     <script>
+        var frutas = ["abacate", "abacaxi", "açaí", "acerola", "amora",
+            "bacaba", "banana", "biribá", "caju", "carambola", "cereja",
+            "coco", "cupuaçu", "figo", "framboesa", "goiaba", "groselha",
+            "jabuticaba", "kiwi", "laranja", "limão", "maçã", "mamão",
+            "manga", "maracujá", "melancia", "melão", "morango", "pera"];
+
+        function primeiraLetraMaiuscula(palavra) {
+            return palavra.charAt(0).toUpperCase() + palavra.slice(1);
+        }
+
+        function atualizarTabela() {
+            var tabela = document.getElementById("corpo-tabela");
+            tabela.innerHTML = "";
+
+            for (i=0; i<frutas.length;i++) {
+                tabela.innerHTML += "<tr style='border: 2px solid blue'><td>" + (i + 1) + "</td><td>" + primeiraLetraMaiuscula(frutas[i]) + "</td></tr>";
+            }
+        }
+
+        function tratamentoPalavra(palavra) {
+            var palavraLowerCase = palavra.toLowerCase();
+            return palavraLowerCase.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+        }
+
+        function retirarFruta() {
+            var fruta = document.getElementById("fruta-tirar").value;
+            var nome_tratado = tratamentoPalavra(fruta);
+
+            var indice = frutas.findIndex(f => tratamentoPalavra(f) === nome_tratado);
+            if (indice !== -1) {
+                frutas.splice(indice, 1);
+                atualizarTabela();
+            } else {
+                console.log("Fruta não encontrada na lista.");
+            }
+        }
+
+        function pesquisarFruta() {
+            var fruta = document.getElementById("fruta-pesquisar").value;
+            var nome_tratado = tratamentoPalavra(fruta);
+
+            var tabela = document.getElementById("corpo-tabela");
+            tabela.innerHTML = "";
+
+            if (frutas.some(f => tratamentoPalavra(f) === nome_tratado)) {
+                tabela.innerHTML += "<tr  style='border: 2px solid blue'><td>1</td><td>" + primeiraLetraMaiuscula(fruta) + "</td></tr>";
+            } else {
+                tabela.innerHTML += "<tr  style='border: 2px solid blue'><td>1</td><td>Nenhum resultado encontrado!</td></tr>";
+            }
+        }
+
+        window.onload = function() {
+            atualizarTabela();
+        };
     </script>
-  </head>
-  <body>
-  </body>
+</head>
+<body>
+    <div>
+        <input type="text" placeholder="Digite uma fruta" id="fruta-tirar">
+        <button onclick="retirarFruta()">Retirar</button>
+        <input type="text" placeholder="Digite uma fruta" id="fruta-pesquisar">
+        <button onclick="pesquisarFruta()">Pesquisar</button>
+    </div>
+
+    <h1>Lista de Compras: Frutas 🍎🍌🍇</h1>
+    <table style="border: 2px solid blue">
+        <thead>
+            <tr>
+                <th>Número</th>
+                <th>Fruta</th>
+            </tr>
+        </thead>
+        <tbody id="corpo-tabela">
+        </tbody>
+    </table>
+</body>
 </html>
