@@ -5,6 +5,45 @@
     <meta name="viewport" content="width-device-width, initial-scale=1.0">
     <title>Lógica 2</title>
     <script>
+        var planetas = ["Terra", "Marte", "Plutão", "Vênus", "Júpiter", "Saturno"];
+
+        var end = false;
+        while(!end) {
+            var resposta = prompt("Insira o nome de um planeta: ");
+            var resposta_minuscula = resposta.toLowerCase();
+            // Retira os acentos
+            var resposta_final = resposta_minuscula.normalize('NFD'). replace(/[\u0300-\u036f]/g, "");
+           
+            switch(resposta_final) {
+                case 'terra':
+                    alert("O planeta escrito está presente no banco de dados. TERRA");
+                    end = true;
+                    break;
+                case 'marte':
+                    alert("O planeta escrito está presente no banco de dados. MARTE");
+                    end = true;
+                    break;
+                case 'plutao':
+                    alert("O planeta escrito está presente no banco de dados. PLUTÃO");
+                    end = true;
+                    break;
+                case 'venus':
+                    alert("O planeta escrito está presente no banco de dados. VÊNUS");
+                    end = true;
+                    break;
+                case 'jupiter':
+                    alert("O planeta escrito está presente no banco de dados. JÚPITER");
+                    end = true;
+                    break;
+                case 'saturno':
+                    alert("O planeta escrito está presente no banco de dados. SATURNO");
+                    end = true;
+                    break;
+                default:
+                    alert("Nome não encontrado na base de dados. Tente novamente.");
+                    break;
+            }
+        }
     </script>
   </head>
   <body>
